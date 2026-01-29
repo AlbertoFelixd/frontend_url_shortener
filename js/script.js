@@ -28,14 +28,19 @@ document.getElementById('urlForm').addEventListener('submit', async function(eve
         });
         
         const data = await response.json();
-
+        
         const fullShortUrl = API_URL + data.code;
 
-        alert('URL acortada: ' + fullShortUrl);
+        if (response.ok) {
+            alert('URL acortada: ' + fullShortUrl);
 
-        console.log('URL original:', data.longUrl);
-        console.log('Código:', data.code);
-        console.log('URL corta:', fullShortUrl);
+            console.log('URL original:', data.longUrl);
+            console.log('Código:', data.code);
+            console.log('URL corta:', fullShortUrl);
+        } else {
+            alert('URL invalido');
+            console.error('Error al acortar la URL:', data);
+        }
 
     } catch (error) {
         console.error('Error:', error);
